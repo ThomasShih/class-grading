@@ -1,0 +1,10 @@
+FROM python:3.11-buster
+
+RUN pip install poetry==1.6.1
+
+COPY . ./
+
+RUN rm -rf .venv
+RUN poetry install
+
+EXPOSE 8000
