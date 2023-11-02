@@ -9,3 +9,4 @@ engine = create_async_engine(DATABASE_URL)
 async def async_connection():
     async with engine.connect() as conn:
         yield conn
+        await conn.commit()

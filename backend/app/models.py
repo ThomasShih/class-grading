@@ -1,58 +1,48 @@
 from datetime import date
-from pydantic import BaseModel
+from typing import Optional
+from pydantic import BaseModel, EmailStr, field_validator
 
 
 class CamelCasedModel(BaseModel):
     class Config:
         alias_generator = lambda string: string[0].lower() + string[1:]
-        allow_population_by_field_name = True
+        populate_by_name = True
+        from_attributes = True
 
 
-class StudentBase(CamelCasedModel):
+class StudentCreate(CamelCasedModel):
     first_name: str
     date_of_birth: date
-    email_address: str
+    email_address: EmailStr
+
+    @field_validator("date_of_birth")
+    def validate_age(cls, v):
+        age = (date.today() - v).days / 365
+        if age < 10:
+            raise ValueError("must be 10 or older")
+        return v
 
 
-class StudentCreate(StudentBase):
-    pass
-
-
-class Student(StudentBase):
+class Student(StudentCreate):
     student_id: int
 
-    class Config:
-        orm_mode = True
 
-
-class CourseBase(CamelCasedModel):
+class CourseCreate(CamelCasedModel):
     course_name: str
 
 
-class CourseCreate(CourseBase):
-    pass
-
-
-class Course(CourseBase):
+class Course(CourseCreate):
     course_id: int
-    students: List[Student] = []
-
-    class Config:
-        orm_mode = True
+    students: list[Student] = []
 
 
-class StudentCourseAssociationBase(CamelCasedModel):
+class StudentCourseAssociation(CamelCasedModel):
     course_id: int
     student_id: int
     score: Optional[str] = None
 
-
-class StudentCourseAssociationCreate(StudentCourseAssociationBase):
-    pass
-
-
-class StudentCourseAssociation(StudentCourseAssociationBase):
-    pass
-
-    class Config:
-        orm_mode = True
+    @field_validator("score")
+    def validate_age(cls, v):
+        if v not in ["A", "B", "C", "D", "E", "F"]:
+            raise ValueError("must be A, B, C, D, or F")
+        return v
