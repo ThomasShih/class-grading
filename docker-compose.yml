@@ -18,3 +18,13 @@ services:
       - db
     volumes:
       - ./backend/app:/app/app
+  frontend:
+    build: ./frontend
+    command: "npm run start"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
