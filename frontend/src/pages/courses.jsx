@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { CompactTable } from '@table-library/react-table-library/compact';
-import { useTheme } from '@table-library/react-table-library/theme';
-import { getTheme } from '@table-library/react-table-library/baseline';
 import NavBar from "../components/common/navBar";
 import NewCourse from "../components/common/newCourse";
+import DataTable from "../components/common/dataTable";
 import { getCourses, deleteCourse } from "../api";
 import "./styles/page.css";
 
@@ -31,7 +29,6 @@ const Courses = () => {
 		});
 	}
 
-	const theme = useTheme(getTheme());
 	const columns = [
 		{
 			label: "Course Name",
@@ -56,7 +53,7 @@ const Courses = () => {
 							Courses
 						</div>
 						<NewCourse refresh={refresh} />
-						<CompactTable columns={columns} data={{ nodes: courses }} theme={theme} />
+						<DataTable columns={columns} rows={courses} />
 					</div>
 				</div>
 			</div>

@@ -36,4 +36,27 @@ const deleteStudent = async (student_id) => {
     return response.data;
 }
 
-export { createCourse, getCourses, deleteCourse, createStudent, getStudents, deleteStudent };
+const createCourseResult = async (course_id, student_id, score) => {
+    const response = await axios.post('http://localhost:8000/results', {
+        course_id: course_id,
+        student_id: student_id,
+        score: score,
+    });
+    return response.data;
+}
+
+const getCourseResults = async () => {
+    const response = await axios.get(`http://localhost:8000/results`);
+    return response.data;
+}
+
+const deleteCourseResult = async (course_id, student_id) => {
+    const response = await axios.delete(`http://localhost:8000/results`, {
+        course_id: course_id,
+        student_id: student_id,
+    });
+    return response.data;
+}
+
+
+export { createCourse, getCourses, deleteCourse, createStudent, getStudents, deleteStudent, createCourseResult, getCourseResults, deleteCourseResult };
