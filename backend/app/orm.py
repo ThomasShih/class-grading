@@ -9,6 +9,7 @@ class StudentOrm(Base):
     __tablename__ = "students"
     student_id = Column(Integer, primary_key=True, autoincrement=True)
     first_name = Column(String(255), nullable=False)
+    last_name = Column(String(255), nullable=False)
     date_of_birth = Column(Date, nullable=False)
     email_address = Column(String(255), nullable=False)
 

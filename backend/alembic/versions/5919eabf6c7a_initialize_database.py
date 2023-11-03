@@ -23,6 +23,7 @@ def upgrade() -> None:
         "students",
         sa.Column("student_id", sa.Integer, primary_key=True, autoincrement=True),
         sa.Column("first_name", sa.String(255), nullable=False),
+        sa.Column("last_name", sa.String(255), nullable=False),
         sa.Column("date_of_birth", sa.Date, nullable=False),
         sa.Column("email_address", sa.String(255), nullable=False),
     )

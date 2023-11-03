@@ -12,6 +12,7 @@ class CamelCasedModel(BaseModel):
 
 class StudentCreate(CamelCasedModel):
     first_name: str
+    last_name: str
     date_of_birth: date
     email_address: EmailStr
 
