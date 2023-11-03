@@ -45,8 +45,16 @@ const Students = () => {
     const theme = useTheme(getTheme());
     const columns = [
         {
-            label: "Student Name",
-            renderCell: (row) => row.student_name
+            label: "Name & Family name",
+            renderCell: (row) => `${row.first_name} ${row.last_name}`
+        },
+        {
+            label: "DOB",
+            renderCell: (row) => row.date_of_birth
+        },
+        {
+            label: "Email",
+            renderCell: (row) => row.email_address
         },
         {
             label: "Delete Student",

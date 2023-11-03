@@ -56,7 +56,7 @@ function NewCourse(props) {
                         </div>
                         <div>
                             <label>
-                                Last Name:
+                                Family Name:
                                 <input type="text" value={lastName} onChange={(event) => setLastName(event.target.value)} required />
                             </label>
                         </div>
