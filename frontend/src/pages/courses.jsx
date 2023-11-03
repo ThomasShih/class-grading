@@ -3,21 +3,10 @@ import { Helmet } from "react-helmet";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
-import axios from "axios";
 import NavBar from "../components/common/navBar";
 import NewCourse from "../components/common/newCourse";
-
+import { getCourses, deleteCourse } from "../api";
 import "./styles/page.css";
-
-const getCourses = async () => {
-	const response = await axios.get("http://localhost:8000/courses/");
-	return response.data;
-}
-
-const deleteCourse = async (course_id) => {
-	const response = await axios.delete(`http://localhost:8000/courses/${course_id}/`);
-	return response.data;
-}
 
 const Courses = () => {
 	const [courses, setCourses] = useState([]);

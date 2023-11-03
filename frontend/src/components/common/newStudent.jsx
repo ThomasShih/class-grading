@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { ReactDialogBox } from 'react-js-dialog-box';
 import 'react-js-dialog-box/dist/index.css';
 
-function NewCourse(props) {
+import { createStudent } from '../../api';
+
+function NewStudent(props) {
     const { refresh } = props;
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -14,12 +15,7 @@ function NewCourse(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await axios.post('http://localhost:8000/students', {
-            first_name: firstName,
-            last_name: lastName,
-            date_of_birth: dateOfBirth,
-            email_address: email,
-        });
+        await createStudent(firstName, lastName, dateOfBirth, email);
         refresh();
         setShowForm(false);
     };
@@ -87,4 +83,4 @@ function NewCourse(props) {
     );
 }
 
-export default NewCourse;
+export default NewStudent;

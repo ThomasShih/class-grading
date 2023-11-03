@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ReactDialogBox } from 'react-js-dialog-box';
 import 'react-js-dialog-box/dist/index.css';
 
-import { createCourse } from '../../api';
+import { createCourse } from '../../services/courseService';
 
 function NewCourse(props) {
     const { refresh } = props;

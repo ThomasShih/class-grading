@@ -3,21 +3,11 @@ import { Helmet } from "react-helmet";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { useTheme } from '@table-library/react-table-library/theme';
 import { getTheme } from '@table-library/react-table-library/baseline';
-import axios from "axios";
 import NavBar from "../components/common/navBar";
 import NewStudent from "../components/common/newStudent";
-
+import { getStudents, deleteStudent } from "../api";
 import "./styles/page.css";
 
-const getStudents = async () => {
-    const response = await axios.get("http://localhost:8000/students/");
-    return response.data;
-}
-
-const deleteStudent = async (student_id) => {
-    const response = await axios.delete(`http://localhost:8000/students/${student_id}/`);
-    return response.data;
-}
 
 const Students = () => {
     const [students, setStudents] = useState([]);
