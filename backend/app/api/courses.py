@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import insert, select, delete
 from ..router_dependicies import async_connection
 from ..models import Course, CourseCreate
-from ..orm import CourseOrm
+from ..orm import CourseOrm, StudentCourseAssociationOrm
 
 courses_router = APIRouter()
 
@@ -39,5 +39,10 @@ async def delete_course(
     id: int,
     connection=Depends(async_connection),
 ):
+    delete_grades_stmt = delete(StudentCourseAssociationOrm).where(
+        StudentCourseAssociationOrm.course_id == id
+    )
+    await connection.execute(delete_grades_stmt)
+
     delete_stmt = delete(CourseOrm).where(CourseOrm.course_id == id)
     await connection.execute(delete_stmt)

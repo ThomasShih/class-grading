@@ -14,8 +14,7 @@ function NewCourseResult({ students, courses, refresh }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(courseId, studentId, grade)
-        await createCourseResult(studentId, courseId, grade);
+        await createCourseResult(courseId, studentId, grade);
         refresh();
         setShowForm(false);
         toast("Success!");
