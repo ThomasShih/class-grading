@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ReactDialogBox } from 'react-js-dialog-box';
 import 'react-js-dialog-box/dist/index.css';
 
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { createStudent } from '../../api';
 
 function NewStudent(props) {
@@ -18,6 +20,7 @@ function NewStudent(props) {
         await createStudent(firstName, lastName, dateOfBirth, email);
         refresh();
         setShowForm(false);
+        toast("Success!");
     };
 
     useEffect(() => {
@@ -30,6 +33,7 @@ function NewStudent(props) {
     return (
         <div>
             <button onClick={() => setShowForm(true)}>Add New Student</button>
+            <ToastContainer />
             {showForm && (
                 <ReactDialogBox
                     closeBox={() => { setShowForm(false); setFirstName(''); }}

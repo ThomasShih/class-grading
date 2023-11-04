@@ -31,6 +31,7 @@ const CourseResults = () => {
     }
 
     const onDelete = async (course_id, student_id) => {
+        console.log(course_id, student_id)
         await deleteCourseResult(course_id, student_id);
         const results = await getCourseResults();
         setCourseResults(results);

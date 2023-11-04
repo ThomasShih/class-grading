@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ReactDialogBox } from 'react-js-dialog-box';
 import 'react-js-dialog-box/dist/index.css';
 
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { createCourse } from '../../api';
 
 function NewCourse(props) {
@@ -14,11 +16,13 @@ function NewCourse(props) {
         await createCourse(courseName);
         refresh();
         setShowForm(false);
+        toast("Success!");
     }
 
     return (
         <div>
             <button onClick={() => setShowForm(true)}>Add New Course</button>
+            <ToastContainer />
             {showForm && (
                 <ReactDialogBox
                     closeBox={() => { setShowForm(false); setCourseName(''); }}

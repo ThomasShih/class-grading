@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Courses from "./pages/courses";
 import Students from "./pages/students";
 import CourseResults from "./pages/courseResults";

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ReactDialogBox } from 'react-js-dialog-box';
 import 'react-js-dialog-box/dist/index.css';
 
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { createCourseResult } from '../../api';
 
 function NewCourseResult({ students, courses, refresh }) {
@@ -12,9 +14,11 @@ function NewCourseResult({ students, courses, refresh }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(courseId, studentId, grade)
         await createCourseResult(studentId, courseId, grade);
         refresh();
         setShowForm(false);
+        toast("Success!");
     }
 
     const student_options = students.map((student) => {
@@ -28,6 +32,7 @@ function NewCourseResult({ students, courses, refresh }) {
     return (
         <div>
             <button onClick={() => setShowForm(true)}>Add New Course</button>
+            <ToastContainer />
             {showForm && (
                 <ReactDialogBox
                     closeBox={() => { setShowForm(false); setGrade(''); }}
@@ -42,30 +47,38 @@ function NewCourseResult({ students, courses, refresh }) {
                     headerText='New Course'
                 >
                     <form onSubmit={handleSubmit}>
-                        <label>
-                            Student:
-                            <select value={studentId} onChange={(event) => setStudentId(event.target.value)}>
-                                {student_options}
-                            </select>
-                        </label>
-                        <label>
-                            Course:
-                            <select value={courseId} onChange={(event) => setCourseId(event.target.value)}>
-                                {course_options}
-                            </select>
-                        </label>
-                        <label>
-                            Grade:
-                            <select value={grade} onChange={(event) => setGrade(event.target.value)}>
-                                <option value="">Select a grade</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                                <option value="F">F</option>
-                            </select>
-                        </label>
+                        <div>
+                            <label>
+                                Student:
+                                <select value={studentId} onChange={(event) => setStudentId(event.target.value)}>
+                                    <option value="">Select a student</option>
+                                    {student_options}
+                                </select>
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Course:
+                                <select value={courseId} onChange={(event) => setCourseId(event.target.value)}>
+                                    <option value="">Select a course</option>
+                                    {course_options}
+                                </select>
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                Grade:
+                                <select value={grade} onChange={(event) => setGrade(event.target.value)}>
+                                    <option value="">Select a grade</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </label>
+                        </div>
                         <button type="submit">Submit</button>
                     </form>
                 </ReactDialogBox>

@@ -24,6 +24,7 @@ const createStudent = async (firstName, lastName, dateOfBirth, email) => {
         date_of_birth: dateOfBirth,
         email_address: email,
     });
+    return response.data;
 }
 
 const getStudents = async () => {
@@ -38,8 +39,8 @@ const deleteStudent = async (student_id) => {
 
 const createCourseResult = async (course_id, student_id, score) => {
     const response = await axios.post('http://localhost:8000/results', {
-        course_id: course_id,
-        student_id: student_id,
+        course_id: Number(course_id),
+        student_id: Number(student_id),
         score: score,
     });
     return response.data;
@@ -52,8 +53,10 @@ const getCourseResults = async () => {
 
 const deleteCourseResult = async (course_id, student_id) => {
     const response = await axios.delete(`http://localhost:8000/results`, {
-        course_id: course_id,
-        student_id: student_id,
+        params: { // axios requires this to be an object
+            course_id: course_id,
+            student_id: student_id,
+        }
     });
     return response.data;
 }

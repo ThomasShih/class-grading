@@ -11,7 +11,13 @@ const Home = () => {
                 <title>{`Home`}</title>
             </Helmet>
             <NavBar active="home" />
-
+            <div className="page-content">
+                <div className="content-wrapper">
+                    <div className="projects-container">
+                        To add a course, student, or course result, click on the corresponding tab in the navigation bar.
+                    </div>
+                </div>
+            </div>
         </React.Fragment>
     );
 };
